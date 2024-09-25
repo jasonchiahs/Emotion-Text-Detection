@@ -26,7 +26,7 @@ Requirements
 
 ## Usage
 1. Run the application:
-2. terminal: streamlit run app.py
+2. terminal: streamlit run app.py or run app_with_noAIgen.py 
 3. Follow the instructions on the web interface to input data and receive emotion predictions.
 
 # Model Training
