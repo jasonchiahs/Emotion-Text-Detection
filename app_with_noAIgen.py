@@ -21,6 +21,26 @@ def interpret_result(predicted_result):
 
 st.title("Text Emotion detector: ")
 
+display = '''
+Click the 'Analyze' button to see the predicted emotion and other relevant details.\n
+Example Sentences \n
+Sadness: "I can’t believe I lost my job." \n
+Happiness: "Spending time with you always makes me smile." \n
+Love: "You are so romantic and make me feel so sweet" \n
+Anger: "I hated my job and my boss" \n
+Fear: "This is so uncomfortable and it is making me feel uneasy." \n
+Surprise: "This is amazing !" \n
+'''
+
+with st.container():
+    st.subheader("Step 1: Input Your Text")
+    st.write("Enter the text for which you want to analyze the emotion in the text box provided.")
+
+    st.subheader("Step 2: View the Results")
+
+with st.expander("More Information"):
+    st.write(display)
+
 user_text = st.text_input("Write down your emotion here.")
 
 if st.button("Submit"):
