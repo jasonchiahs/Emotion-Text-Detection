@@ -12,26 +12,25 @@ This project uses logistic regression to classify and interpret the current emot
 To get started, clone this repository and install the required packages:
 
 # bash
-git clone https://github.com/jasonchiahs/Emotion-Text-Detection.git
-cd emotion-recognition
-pip install -r requirements.txt
+1. git clone https://github.com/jasonchiahs/Emotion-Text-Detection.git
+2. cd emotion-recognition
+3. pip install -r requirements.txt
 
 Requirements
-Python 3.x
-Streamlit
-scikit-learn
-numpy
-pandas
-OpenAI
-(Other dependencies as needed)
+- Python 3.x
+- Streamlit
+- scikit-learn
+- numpy
+- pandas
+- OpenAI
 
 ## Usage
-Run the application:
-terminal: streamlit run app.py
-Follow the instructions on the web interface to input data and receive emotion predictions.
+1. Run the application:
+2. terminal: streamlit run app.py
+3. Follow the instructions on the web interface to input data and receive emotion predictions.
 
 # Model Training
-The logistic regression model was trained on Kaggle: Emotion dataset to predict emotions based on 'text' & 'label'.
+The logistic regression model was trained on my local machine using the Kaggle Emotion dataset to predict emotions based on the 'text' and 'label' columns.
 
 # Contributing
 Contributions are welcome! Feel free to submit a pull request or open an issue to discuss improvements.
