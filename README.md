@@ -37,4 +37,6 @@ The logistic regression model was trained on Kaggle: Emotion dataset to predict 
 Contributions are welcome! Feel free to submit a pull request or open an issue to discuss improvements.
 
 # Room for improvement
-Definietl
+There is still significant room for improvement in this project. The dataset used is not as clean as anticipated, which can impact the model's performance. This project serves as a showcase of my ability to implement NLP models using both traditional machine learning and deep learning techniques.
+
+Moving forward, I aim to explore various models and leverage more powerful computational resources to enhance the performance of the system. My ultimate goal is to secure a position as a machine learning engineer in the near future.
