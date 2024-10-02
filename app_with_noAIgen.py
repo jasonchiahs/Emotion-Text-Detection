@@ -1,43 +1,65 @@
 import streamlit as st
 import pickle
-from text_processing import preprocessing_text
+from preprocessing import *
+from nearest_cluster import recommend_songs
 from visual_display import plot_pie_chart
 
+# ------ Processing
 with open('tfidf_vectorizer.pickle', 'rb') as handle:
     tfidf_vectorizer = pickle.load(handle)
 
+# ------ load trained model
 with open('log_model.pkl', 'rb') as file:
-    model = pickle.load(file)
+    logmodel = pickle.load(file)
+
+def display_music(track_ids):
+    iframe_str = ""
+    for track_id in track_ids:
+        iframe_str += f"""
+        <iframe src="https://open.spotify.com/embed/track/{track_id}" width="300" height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        """
+    st.sidebar.markdown(iframe_str, unsafe_allow_html=True)
 
 st.set_page_config(page_title="Text Emotion Detector", page_icon=":sparkles:", layout="wide")
-st.sidebar.title("Navigation")
-st.sidebar.info("This app analyzes emotions in text. Enter your text and see the predicted emotions!")
 
-st.title("Text Emotion detector: ")
+# --------------------- Side Bar --------------------- #
+st.sidebar.title("🎶 Welcome to My Music Recommendation App!")
+st.sidebar.markdown("""
+### 🎤 Recommendations Based on Your Emotion
+""")
+# ---------------------------------------------------- #
 
-display = '''
-Click the 'Analyze' button to see the predicted emotion and other relevant details.\n
-Example Sentences \n
-Sadness: "I can’t believe I lost my job." \n
-Happiness: "Spending time with you always makes me smile." \n
-Love: "You are so romantic and make me feel so sweet" \n
-Anger: "I hated my job and my boss" \n
-Fear: "This is so uncomfortable and it is making me feel uneasy." \n
-Surprise: "This is amazing !" \n
-'''
+st.title("Emotion Text Detector: ")
 
 with st.container():
-    st.subheader("Input Your Text")
     st.write("Enter the text for which you want to analyze the emotion in the text box provided.")
-with st.expander("More Information"):
-    st.write(display)
-
-user_text = st.text_input("Write down your emotion here.")
+user_text = st.text_input("Write down your text here.")
 
 if st.button("Submit"):
     if user_text:
         processed_input = tfidf_vectorizer.transform([preprocessing_text(str(user_text))])
-        predicted_result = model.predict_proba(processed_input)[0]
-        plot_pie_chart(predicted_result)
+        predicted_result = logmodel.predict_proba(processed_input)
+        plot_pie_chart(predicted_result[0])
+        map_emotion = map_emotionresults(dict(zip(logmodel.classes_,predicted_result[0])))
+        track_ids = recommend_songs(emotion_to_features(map_emotion), num_recommendations=5)
+        display_music(track_ids)
     else:
         st.write("Write your emotion here :) ")
+
+display = """
+### How It Works
+This application uses text emotion analysis to recommend songs that resonate with your current feelings. Simply type in an emotion, and we'll provide a selection of songs to match.
+
+### Examples of Emotions:
+- Happiness:    Spending time with you always makes me smile.
+- Sadness:      I can’t believe I lost my job.
+- Love:         You are so romantic and make me feel so sweet
+- Anger:        I hate my neighbours pets
+- Fear:         I am having nightmares among everyday
+- Surprise:     This is amazing! How did you do that!
+### What to Expect:
+After entering your emotion, you will see a list of songs that are curated based on your input.
+Enjoy the music and let it uplift your spirits!
+"""
+with st.expander("More Information"):
+    st.write(display)
