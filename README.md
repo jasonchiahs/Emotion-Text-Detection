@@ -1,12 +1,19 @@
 # Emotion Recognition using Logistic Regression
 
 ## Overview
-This project uses logistic regression to classify and interpret the current emotions of users based on their input data. It provides an interactive user interface that displays the predicted emotion along with a corresponding message and image.
+Emotion Text Analysis is an innovative project designed to uncover and understand the emotional nuances in textual data. By leveraging natural language processing (NLP) and machine learning techniques, this project automatically identifies and categorizes emotions in written content, such as social media posts, reviews, and articles, and recommends songs based on the analyzed mood.
 
 ## Features
+# Emotion Identification:
 - Predicts user emotions: Sad, Happy, Love, Angry, Scared, Surprise
-- Displays a message and an image representing the predicted emotion
-- User-friendly interface built with Streamlit
+- Trained model using logistic regression
+- Optimized parameters through grid search
+- Achieved 92% accuracy using TF-IDF vectorization
+
+# Song Selection:
+- Utilizes K-means clustering to find nearest clusters based on attributes
+- A dedicated function converts these emotions into song attributes, fitting them into the K-means model and using Euclidean distance to find the nearest recommended songs
+- Song recommendations are provided via Spotify
 
 ## Installation
 To get started, clone this repository and install the required packages:
